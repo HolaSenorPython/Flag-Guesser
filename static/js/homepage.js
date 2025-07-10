@@ -14,7 +14,7 @@ letsPlay.addEventListener('click', (event) => {
     dababySound.play(); // Play the sound
     homePageGif.src = "static/assets/img/dababy.png"; // Change spinning globe to dababy
     homePageGif.style.transform = 'scaleX(-1)'; // Flip dababy horizontally
-    homePageGif.style.transform = 'scaleX(-1)'; // flip again lol
+    homePageGif.style.transform = 'scaleX(1)'; // flip again lol
 
     // Visually, reset button to unclicked
     letsPlay.blur();
