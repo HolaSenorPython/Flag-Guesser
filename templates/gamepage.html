@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamepage!</title>
+    <!--Get BOOTSTRAP CSS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!--GET MY CUSTOM CSS!-->
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body data-bs-theme="dark">
+<!--Start prompting--> <!--NOTE: give 'CLEARABLE' id so we can clear later-->
+    <div class="d-flex align-items-center justify-content-center w-100 vh-100 flex-column" id="clearableDiv">
+        <img src="static/assets/img/goofy.png" width="200" height="200">
+        <h1>Are you ready to play?</h1>
+        <div class="d-flex flex-row gap-3 py-2">
+            <button id="yesBtn" class="btn btn-lg btn-success">Yes!✅</button> <!--Check for this id in the script later-->
+            <button id="noBtn" class="btn btn-lg btn-danger">No!🚫</button> <!--Check for this id in the script later-->
+            <a href="{{ url_for('home') }}" class="btn btn-lg btn-gray">Return Home!🏠</a> <!--Returns user home-->
+        </div>
+        <img src="static/assets/img/clock-wait.gif" class="waitStuff rounded-2 d-none mt-3" width="100" height="100"> <!--CLASS 'waitStuff' for revealing later, display NONE by def-->
+        <p class="waitStuff d-none fs-5 fw-bold text-center">Ok. I'll give you<br>some time!</p> <!--CLASS 'waitStuff' for revealing later, display NONE by default-->
+    </div>
+<!--This is the display for game stuff on page, hidden until yes is clicked-->
+<div class="d-flex align-items-center justify-content-center w-100 vh-100 d-none" id="gameDiv">
+    <div class="container">
+        <div class="row"> <!--The divs containing the flags will be flexboxes that have centering on them! :D-->
+            <div class="col-sm-5 bg bg-light-blue rounded-2 border border-white border-3 
+            d-flex flex-column justify-content-center align-items-center gap-2" id="flagOneDiv">
+                <img src="" width="300" height="300" class="rounded-2" id="flagOne"> <!--IMAGE THAT GETS ADJUSTED WITH JS LATER-->
+            </div>
+            <div class="col-sm-2 text-center">
+                <p class="fs-3 text-white fw-bold">Which country flag is...<br>
+                    <p class="fs-3 fw-bold" style="color: red;" id="whichCountry"> <!--The WHICH COUNTRY thingy is gonna be dynamic with JS!-->
+                    </p>
+            </div>
+            <div class="col-sm-5 bg bg-light-blue rounded-2 border border-white border-3 d-flex 
+            flex-column align-items-center gap-2" id="flagTwoDiv">
+                <img src="" width="300" height="300" class="rounded-2" id="flagTwo"> <!--IMAGE THAT GETS ADJUSTED WITH JS LATER-->
+            </div>
+        </div>
+    </div>
+</div>
+<!--THIS IS HIDDEN AUDIO THAT WILL PLAY WHEN BUTTONS ARE CLICKED-->
+<audio src="static/assets/audio/jeopardy-themelq.mp3" id="hiddenSound"></audio>
+<audio src="static/assets/audio/coin_1.mp3" id="hiddenSound2"></audio>
+<!--BOOTSTRAP JS!-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+<!--THE GAME JAVASCRIPT-->
+<script src="static/js/gamepage.js"></script>
+</body>
+</html>

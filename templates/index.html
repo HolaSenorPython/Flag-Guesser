@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flag Guesser!</title>
+    <!--Get BOOTSTRAP CSS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!--GET MY CUSTOM CSS!-->
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body data-bs-theme="dark">
+    <div class="container my-5"> 
+        <div class="p-5 text-center bg-body-tertiary rounded-3"> 
+        <img src="static/assets/img/spinning-earth.gif" class="rounded-2" width="400" height="400" id="homePageGif">
+        <h1 class="text-body-emphasis"><strong>Flag Guesser!</strong></h1> 
+        <p class="col-lg-8 mx-auto fs-5 text-white pt-2">
+        Do <b><u>you</u></b> want to <u>get better at recognizing world flags?</u> Are you interested
+        in the different cultures of the world and how they operate? <s class="text-muted fw-bold">Are you
+            a dumb American who hopes to not embarass themselves the next time they
+            travel?</s> Well you should play this game! This website is a fun way
+            for you to learn the flags of the world, through repetition and quizzing!
+        </p> 
+        <div class="d-inline-flex gap-2 mb-5 pt-2"> 
+            <a class="btn btn-lg btn-purple" href="{{ url_for('gamepage') }}" id="letsPlay">I wanna play!🎮</a>
+            <a class="btn btn-lg btn-primary" href="{{ url_for('contact_me')}}" id="contactMe">Contact me!📞</a>
+        </div> 
+        </div> 
+    </div>
+<!--SECRET AUDIO for HOMEPAGE-->
+<audio src="static/assets/audio/pluh.mp3" id="pluhSound"></audio>
+<audio src="static/assets/audio/dababy-lets-go.mp3" id="dababySound"></audio>
+<!--BOOTSTRAP JS!-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+<!--MY HOMEPAGE JS!-->
+<script src="static/js/homepage.js"></script>
+</body>
+</html>

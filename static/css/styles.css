@@ -1,0 +1,60 @@
+/* 
+THIS FILE WILL CONTAIN ALL MY CUSTOM CSS!
+*/
+
+/* 
+    CUSTOM BUTTONS 
+*/
+.btn-purple {
+    background-color: #6f42c1;
+    color: white; /* Text color */
+    border: none;
+}
+
+.btn-purple:hover,
+.btn-purple:focus {
+    background-color: #D3D3FF;
+    color: white;
+}
+
+.btn-maroon {
+    background-color: maroon;
+    color: white;
+    border: white
+}
+
+.btn-maroon:hover,
+.btn-maroon:focus {
+    background-color: #FF474D;
+    color: white;
+}
+
+.btn-gray {
+    background-color: #A9A9A9;
+    color: white;
+    border: white;
+}
+
+.btn-gray:hover,
+.btn-gray:focus {
+    background-color: #D3D3D3;
+    color: white;
+}
+
+/* Adjust the bootstrap primary button hover and border */
+.btn-primary {
+    border: none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: lightblue;
+    color: white;
+}
+
+/*
+ CUSTOM BACKGROUND COLOR FOR GAME STUFF!
+*/
+.bg-light-blue {
+    background-color: #7393B3;
+}

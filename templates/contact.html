@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me!</title>
+    <!--Get BOOTSTRAP CSS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!--GET MY CUSTOM CSS!-->
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body data-bs-theme="dark">
+<!--GET READY TO LOAD FORM LATER!-->
+{% from "bootstrap5/form.html" import render_form %}
+<!--HERO SECTION UP TOP!-->    
+<div class="px-4 py-5 my-5 text-center border border-white border-3 rounded-2"> 
+    <img src="static/assets/img/hello.gif" class="rounded-2" width="100" height="100">
+    <h1 class="display-5 fw-bold text-body-emphasis">Contact me!</h1> 
+    <div class="col-lg-6 mx-auto"> 
+        <p class="lead mb-4 text-white">Use the form below if you have anything you would
+            like to tell me! Whether it be a bug fix or you just want to say hi, I would
+            love to hear from you!
+        </p> 
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center"> 
+                <a href="{{ url_for('home') }}" class="btn btn-lg btn-maroon">Return Home!🏠</a> 
+            </div> 
+    </div> 
+</div>
+<!--Message Flash section!-->
+<div class="container my-3 d-flex justify-content-center">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn text-danger fw-bold border-0 bg-transparent fs-6 fst-italic" data-bs-dismiss="alert">
+            ❌ Close
+          </button>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+<!--Render form!-->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            {{ render_form(form, novalidate=true) }}
+        </div>
+        <div class="col-sm-6">
+            <img src="static/assets/img/isak.gif" class="rounded-2">
+        </div>
+    </div>
+</div>
+<!--BOOTSTRAP JS!-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+</body>
+</html>
