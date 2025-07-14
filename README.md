@@ -6,8 +6,7 @@ that fetches two flags from the Countries API, and allows you to decide which fl
 ---
 
 ## Notes and Features 📝
-- As of 7/14/25: This is **NOT** live. Steps to utilize locally will be listed below.
-- No login or anything required
+- **NO** login or anything required
 - Has contact me form, for user to send me messages if they wish
 - Fetches the flag and country info using Countries API
 - Bulk of the code in JavaScript
