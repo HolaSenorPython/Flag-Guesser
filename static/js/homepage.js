@@ -10,15 +10,20 @@ const homePageGif = document.getElementById('homePageGif'); // Get the spinning 
 letsPlay.addEventListener('click', (event) => {
     event.preventDefault(); // Don't let the anchor tag redirect immediately
     dababySound.currentTime = 0;
-    dababySound.setVolume = 0.6;
+    dababySound.setVolume = 0.5;
     dababySound.play(); // Play the sound
     homePageGif.src = "static/assets/img/dababy.png"; // Change spinning globe to dababy
     homePageGif.style.transform = 'scaleX(-1)'; // Flip dababy horizontally
-    homePageGif.style.transform = 'scaleX(1)'; // flip again lol
 
     // Visually, reset button to unclicked
     letsPlay.blur();
 
+    // Timeout for dababy flip
+    setTimeout(() => {
+        homePageGif.style.transform = 'scaleX(1)'; // flip dababy again lol
+    }, 1000); // After 1 second
+
+    // This is the timeout for window change
     setTimeout(() => {
         window.location.href = letsPlay.href; // Go to the anchor tag's href attribute after the timeout
     }, 3000); // Should play for about 3 seconds

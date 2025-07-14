@@ -6,15 +6,15 @@ const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const hiddenSound = document.getElementById("hiddenSound");
 const hiddenSound2 = document.getElementById("hiddenSound2"); // This is the yes sound button
+const correctSound = document.getElementById('correctSound'); // This sound plays on a correct country click!
+const wrongSound = document.getElementById('wrongSound'); // This sound plays on an INCORRECT country click!
+const scoreText = document.getElementById('scoreText'); // This is the score text that will dynamically update based on how well the user does
+let userScore = 0; // variable for SCORE that we will check against later
 
 // Now have event listener for both buttons (on click!).
 yesBtn.addEventListener('click', (event) => { // On click, this event function we are making right now should be done
     let clearableDiv = document.getElementById("clearableDiv"); // Define the div
     let gameDiv = document.getElementById('gameDiv'); // Get the game div
-    hiddenSound2.currentTime = 0; // Start sound from beginning
-    hiddenSound2.setVolume = 0.7; // 70% volume
-    hiddenSound2.play(); // Play sound
-
     clearableDiv.classList.add("d-none"); // Add the 'display none' class from BOOTSTRAP here to hide it
     getFlags(); // Get the flags necessary, also does the BUTTONS function for game logic (do before revealing)
     gameDiv.classList.remove('d-none'); // Remove the display none from game div so we can see it
@@ -54,6 +54,9 @@ function getFlags() {
         return response.json(); // Return the json so we can use it in the next 'then' part of the chain (outside of if statement)
       })
       .then(countryJson => {
+            hiddenSound2.currentTime = 0; // Start sound from beginning
+            hiddenSound2.setVolume = 0.7; // 70% volume
+            hiddenSound2.play(); // Play sound
             let dictList = []; // This list will hold country dicts, will use for name later
             let namesList = []; // This list will be passed into choice btns function for game logic
             let random0to249 = Math.floor(Math.random() * 250); // Get random int between 0 and 249 (length of json list)
@@ -75,15 +78,17 @@ function getFlags() {
             let flagOne = document.getElementById('flagOne');
             let flagTwo = document.getElementById('flagTwo');
             whichCountryText.textContent = `${countryName}?`; // Set text equal to the country name (first random country)
+            let cleanCountryName = whichCountryText.textContent.replace("?", ""); // Use this clean country name for checking against later!
             flagOne.src = countryFlagOne; // change the first image's src attribute to the image we got from API
             flagTwo.src = countryFlagTwo; // change the second image's src attribute to the image we got from API
-            getChoiceBtns(namesList, whichCountryText); // Do CHOICE BUTTONS FUNCTION WITH OUR NAMES LIST and CORRECT nation name as input!
+            getChoiceBtns(namesList, cleanCountryName); // Do CHOICE BUTTONS FUNCTION WITH OUR NAMES LIST and CORRECT nation TEXT as input!
       })
       .catch(error => { // This will catch any errors and show them back to me
         console.error("Error fetching flag data", error);
       }) 
 };
 
+//*******************SUMMONING THE BUTTONS JS*******************************/
 function getChoiceBtns(nameList, correctCountry) {
     let flagOneDiv = document.getElementById("flagOneDiv"); // Get both of the little blue boxes holding the flags
     let flagTwoDiv = document.getElementById("flagTwoDiv"); // Get both of the little blue boxes holding the flags
@@ -97,6 +102,54 @@ function getChoiceBtns(nameList, correctCountry) {
     // Config button two
     buttonTwo.innerHTML = "Flag B😳";
     buttonTwo.id = nameList[1];
+    console.log(`Current names list: ${nameList}`);
     buttonTwo.classList.add('btn', 'btn-lg', 'btn-danger');
     flagTwoDiv.appendChild(buttonTwo);
+    // Now add EVENT listeners to these buttons. They should both do my correctness check function on click!
+    buttonOne.addEventListener('click', () => answerCheck(correctCountry, buttonOne, buttonTwo));
+    buttonTwo.addEventListener('click', () => answerCheck(correctCountry, buttonTwo, buttonOne));
+}
+
+//***************ACTUAL CORRECTNESS CHECKING LOGIC, AND KEEPING THE GAME GOING!******************/
+function answerCheck(correctNation, buttonToCheck, otherButton) { // Pass in the button we AREN'T checking against (the one not clicked) for deletion purposes and game loop logic
+    // Grab the div inbetween the two text boxes to add our result/feedback later
+    let textAreaDiv = document.getElementById("textArea");
+    // have a variable we will adjust depending on their answer
+    let feedbackText = null // Start as none
+    if (buttonToCheck.id === correctNation) {
+        // Handle SCORE!
+        userScore += 1;
+        scoreText.textContent = `Score: ${userScore}`
+        // Handle feedback in the text div area
+        feedbackText = document.createElement("p"); // create a paragraph tag that we will use later
+        feedbackText.classList.add('fs-3', 'fw-bold', 'text-decoration-underline'); // add bootstrap styling with the classes
+        feedbackText.style.color = "lime"; // Change its color to green!
+        feedbackText.textContent = "Correct!"; // Set its text to this
+        textAreaDiv.appendChild(feedbackText) // Add it to the text area div for user to see in center!
+        // Handle sound playing
+        correctSound.currentTime = 0.3; // Start it from a little after beginning, thats when trump talks lol
+        correctSound.play() // Play sound
+        // Remove the text after a few seconds, and LOOP THE GAME!!!!!!!!!!!!!!!
+        setTimeout(() => {
+          feedbackText.remove(); // Kill the feedback text
+          // Clear BOTH buttons from screen BEFORE getting the new stuff!!! (they are correct! so they should move)
+          buttonToCheck.remove();
+          otherButton.remove();
+          getFlags(); // Get the flags, which gets the buttons, and yeah
+        }, 1500) // After 1.5 seconds
+    }
+    else {
+      // Handle feedback text stuff
+      feedbackText = document.createElement('p');
+      feedbackText.classList.add('fs-3', 'fw-bold', 'text-decoration-underline'); // add bootstrap styling with the classes
+      feedbackText.style.color = "red"; // Change its color to red!
+      feedbackText.textContent = "Incorrect!"; // Set its text to this
+      textAreaDiv.appendChild(feedbackText) // Add it to the text area div for user to see in center!
+      // Handle sound stuff
+      wrongSound.currentTime = 0; // Start from beginning
+      wrongSound.play(); // Play
+      setTimeout(() => {
+          feedbackText.remove(); // Kill it ( NO LOOP THIS TIME, ONLY ON CORRECT ANSWER)
+        }, 1500) // After 1.5 seconds
+    }
 }
