@@ -145,6 +145,9 @@ function answerCheck(correctNation, buttonToCheck, otherButton) { // Pass in the
         }, 1500) // After 1.5 seconds
     }
     else {
+      // Handle SCORE
+      userScore -= 2; // Subtract 2 from score since user is allowed to pick right one and gain one back
+      scoreText.textContent = `Score: ${userScore}`;
       // Handle feedback text stuff
       feedbackText = document.createElement('p');
       feedbackText.classList.add('fs-3', 'fw-bold', 'text-decoration-underline'); // add bootstrap styling with the classes
