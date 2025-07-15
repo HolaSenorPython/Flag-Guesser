@@ -11,6 +11,7 @@ that fetches two flags from the Countries API, and allows you to decide which fl
 - Fetches the flag and country info using Countries API
 - Bulk of the code in JavaScript
 - There is SOUND and Images! 😀
+- Game runs INFINITELY
 
 ---
 
