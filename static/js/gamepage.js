@@ -8,6 +8,7 @@ const hiddenSound = document.getElementById("hiddenSound");
 const hiddenSound2 = document.getElementById("hiddenSound2"); // This is the yes sound button
 const correctSound = document.getElementById('correctSound'); // This sound plays on a correct country click!
 const wrongSound = document.getElementById('wrongSound'); // This sound plays on an INCORRECT country click!
+const ratherSleep = document.getElementById('gameBgAudio'); // This is the BG audio for the game page
 const scoreText = document.getElementById('scoreText'); // This is the score text that will dynamically update based on how well the user does
 let userScore = 0; // variable for SCORE that we will check against later
 
@@ -25,7 +26,7 @@ noBtn.addEventListener('click', (event) => {
     let waitStuffArray = Array.from(waitStuff); // Turn it into an array to work with
     // Do sound logic for waiting sound
     hiddenSound.currentTime = 0; // Start sound from beginning
-    hiddenSound.setVolume = 0.8; // Lower volume to 80%
+    hiddenSound.volume = 0.9; // Lower volume to 80%
     hiddenSound.play(); // Play sound
 
     // Reveal all the hidden WAIT elements!
@@ -55,8 +56,12 @@ function getFlags() {
       })
       .then(countryJson => {
             hiddenSound2.currentTime = 0; // Start sound from beginning
-            hiddenSound2.setVolume = 0.7; // 70% volume
+            hiddenSound2.volume = 0.7; // 70% volume
             hiddenSound2.play(); // Play sound
+            // Handle the looping bg song
+            ratherSleep.volume = 0.4;
+            ratherSleep.loop = true; // LOOP song
+            ratherSleep.play();
             let dictList = []; // This list will hold country dicts, will use for name later
             let namesList = []; // This list will be passed into choice btns function for game logic
             let random0to249 = Math.floor(Math.random() * 250); // Get random int between 0 and 249 (length of json list)
@@ -128,6 +133,7 @@ function answerCheck(correctNation, buttonToCheck, otherButton) { // Pass in the
         textAreaDiv.appendChild(feedbackText) // Add it to the text area div for user to see in center!
         // Handle sound playing
         correctSound.currentTime = 0.3; // Start it from a little after beginning, thats when trump talks lol
+        correctSound.volume = 0.8; // i adjusted the loudness myself so lets quiet it a little
         correctSound.play() // Play sound
         // Remove the text after a few seconds, and LOOP THE GAME!!!!!!!!!!!!!!!
         setTimeout(() => {
@@ -147,6 +153,7 @@ function answerCheck(correctNation, buttonToCheck, otherButton) { // Pass in the
       textAreaDiv.appendChild(feedbackText) // Add it to the text area div for user to see in center!
       // Handle sound stuff
       wrongSound.currentTime = 0; // Start from beginning
+      wrongSound.volume = 0.8; // i adjusted vol myself here too, so lets quiet it a bit
       wrongSound.play(); // Play
       setTimeout(() => {
           feedbackText.remove(); // Kill it ( NO LOOP THIS TIME, ONLY ON CORRECT ANSWER)
