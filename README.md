@@ -23,7 +23,7 @@ This app is currently live at this link: https://flagguesser.pythonanywhere.com
 
 ---
 ## How do i use this? 😿
-Note, the steps below are for if this app isnt live, or you plan on adjusting the code locally:
+Note, the steps below are for if this app isnt live, or you plan on running the code locally:
 1. Clone this repo
   - git clone https://github.com/HolaSenorPython/Flag-Guesser.git
 2. Create a venv (optional but recommended tbh)
