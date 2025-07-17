@@ -2,7 +2,7 @@
 
 Do YOU want to guess the flags of the world? Well you can with this website! This project is a Flask web app
 that fetches two flags from the Countries API, and allows you to decide which flag is correct from the two!
-
+This app is currently live at this link: https://flagguesser.pythonanywhere.com
 ---
 
 ## Notes and Features 📝
