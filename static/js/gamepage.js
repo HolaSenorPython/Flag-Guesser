@@ -122,8 +122,9 @@ function answerCheck(correctNation, buttonToCheck, otherButton) { // Pass in the
     // have a variable we will adjust depending on their answer
     let feedbackText = null // Start as none
     if (buttonToCheck.id === correctNation) {
-        // Disable button so NO SPAM CLICKS OCCUR
+        // Disable buttons so NO SPAM CLICKS OCCUR
         buttonToCheck.disabled = true;
+        otherButton.disabled = true;
         // Handle SCORE!
         userScore += 1;
         scoreText.textContent = `Score: ${userScore}`
@@ -147,11 +148,18 @@ function answerCheck(correctNation, buttonToCheck, otherButton) { // Pass in the
         }, 1500) // After 1.5 seconds
     }
     else {
-      // Disable button so no spamming occurs
+      // Disable ONLY clicked button so no spamming occurs, user gets chance to pick right answer
       buttonToCheck.disabled = true;
       // Handle SCORE
-      userScore -= 2; // Subtract 2 from score since user is allowed to pick right one and gain one back
-      scoreText.textContent = `Score: ${userScore}`;
+      if (userScore >= 2) { // ONLY take away if the score is not gonna be negative
+        userScore -= 2;
+        // Subtract 2 from score since user is allowed to pick right one and gain one back
+        scoreText.textContent = `Score: ${userScore}`;
+      }
+      else { // Else...
+        userScore = 0; // Keep the score 0
+        scoreText.textContent = `Score: ${userScore}\n(Your score was too\nlow to subtract! 🤣)`; // Keep text zero
+      }
       // Handle feedback text stuff
       feedbackText = document.createElement('p');
       feedbackText.classList.add('fs-3', 'fw-bold', 'text-decoration-underline'); // add bootstrap styling with the classes
