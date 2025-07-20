@@ -122,6 +122,8 @@ function answerCheck(correctNation, buttonToCheck, otherButton) { // Pass in the
     // have a variable we will adjust depending on their answer
     let feedbackText = null // Start as none
     if (buttonToCheck.id === correctNation) {
+        // Disable button so NO SPAM CLICKS OCCUR
+        buttonToCheck.disabled = true;
         // Handle SCORE!
         userScore += 1;
         scoreText.textContent = `Score: ${userScore}`
@@ -145,6 +147,8 @@ function answerCheck(correctNation, buttonToCheck, otherButton) { // Pass in the
         }, 1500) // After 1.5 seconds
     }
     else {
+      // Disable button so no spamming occurs
+      buttonToCheck.disabled = true;
       // Handle SCORE
       userScore -= 2; // Subtract 2 from score since user is allowed to pick right one and gain one back
       scoreText.textContent = `Score: ${userScore}`;
